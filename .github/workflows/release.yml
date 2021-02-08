@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         npm install
-        pip install build
+        pip install build wheel
         pip install -r requirements.txt
     - name: Build a binary wheel and a source tarball
       run: >-
