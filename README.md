@@ -1,3 +1,4 @@
+![Testing](https://github.com/elben10/dash-data-table/workflows/Testing/badge.svg)
 # dash-data-table
 
 dash-data-table is a Dash component library.
