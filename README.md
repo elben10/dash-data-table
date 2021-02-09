@@ -1,4 +1,5 @@
-![Testing](https://github.com/elben10/dash-data-table/workflows/Testing/badge.svg)
+[![Testing](https://github.com/elben10/dash-data-table/workflows/Testing/badge.svg)](https://github.com/elben10/dash-data-table/actions?query=workflow%3ATesting)
+[![Release](https://github.com/elben10/dash-data-table/workflows/Release/badge.svg)](https://github.com/elben10/dash-data-table/actions?query=workflow%3ARelease)
 # dash-data-table
 
 dash-data-table is a Dash component library.
