@@ -11,6 +11,7 @@ dash = "^1.19.0"
 
 [tool.poetry.dev-dependencies]
 dash = {extras = ["dev", "testing"], version = "^1.19.0"}
+typer = "^0.3.2"
 
 [tool.pytest.ini_options]
 testpaths = ["tests/"]

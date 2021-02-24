@@ -5,13 +5,13 @@
   "main": "build/index.js",
   "scripts": {
     "start": "webpack-serve --config ./webpack.serve.config.js --open",
-    "validate-init": "python _validate_init.py",
-    "prepublishOnly": "npm run validate-init",
+    "build:jl": "dash-generate-components ./src/components dash_data_table -p package-info.json --jl-prefix 'ddt' && npm run build:clean-files",
     "build:js": "webpack --mode production",
-    "build:py_and_r": "dash-generate-components ./src/lib/components dash_data_table -p package-info.json --r-prefix '' --jl-prefix ''",
-    "build:py_and_r-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:py_and_r)",
-    "build": "npm run build:js && npm run build:py_and_r",
-    "build:activated": "npm run build:js && npm run build:py_and_r-activated"
+    "build:py": "dash-generate-components ./src/components dash_data_table -p package-info.json && npm run build:copy-files && npm run build:clean-files && mv dash_data_table/components/_imports_.py dash_data_table/components/__init__.py",
+    "build:r": "dash-generate-components ./src/components dash_data_table -p package-info.json --r-prefix 'ddt' && npm run build:clean-files",
+    "build:copy-files": "python cli.py copy-files --excluded '__init__.py' dash_data_table dash_data_table/components",
+    "build:clean-files": "python cli.py clean-folder --excluded '__init__.py' dash_data_table",
+    "build": "npm run build:js && npm run build:py && npm run build:r && npm run build:jl"
   },
   "author": "Jakob Jul Elben <elbenjakobjul@gmail.com>",
   "license": "MIT",
