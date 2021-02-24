@@ -1,4 +1,4 @@
-[![Testing](https://github.com/elben10/dash-data-table/actions/workflows/test.yml/badge.svg)](https://github.com/elben10/dash-data-table/actions/workflows/test.yml)[![Release](https://github.com/elben10/dash-data-table/actions/workflows/release.yml/badge.svg)](https://github.com/elben10/dash-data-table/actions/workflows/release.yml)
+[![Testing](https://github.com/elben10/dash-data-table/actions/workflows/test.yml/badge.svg)](https://github.com/elben10/dash-data-table/actions/workflows/test.yml)&nbsp;&nbsp;&nbsp;&nbsp;[![Release](https://github.com/elben10/dash-data-table/actions/workflows/release.yml/badge.svg)](https://github.com/elben10/dash-data-table/actions/workflows/release.yml)
 
 ### Dash Data Table
 
