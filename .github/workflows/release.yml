@@ -16,23 +16,21 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
+    - name: Python Poetry Action
+      uses: abatilo/actions-poetry@v2.1.0
+    - name: Configure poetry
+      run: |
+        poetry config virtualenvs.create false
     - name: Install dependencies
       run: |
+        poetry install
         npm install
-        pip install -r requirements.txt
     - name: Build a binary wheel and a source tarball
-      run: python setup.py sdist bdist_wheel
+      run: poetry build
     - name: Publish distribution 📦 to Test PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TEST_TOKEN }}
-        repository_url: https://test.pypi.org/legacy/
+      run: poetry publish --repository https://test.pypi.org/legacy/ --username __token__ --password ${{ secrets.PYPI_API_TEST_TOKEN }}
     - name: Publish distribution 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      run: poetry publish --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
