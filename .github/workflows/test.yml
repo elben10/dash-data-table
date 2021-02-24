@@ -21,12 +21,12 @@ jobs:
       uses: abatilo/actions-poetry@v2.1.0
     - name: Configure poetry
       run: |
-        poetry config cache-dir /python-cache
+        poetry config cache-dir $HOME/.venv
         poetry config virtualenvs.create false
     - name: Set up python cache
       uses: actions/cache@v2
       with:
-        path: /python-cache
+        path: $HOME/.venv
         key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
     - name: Install dependencies
       run: |
