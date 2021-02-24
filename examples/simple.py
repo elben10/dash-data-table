@@ -3,6 +3,9 @@ import random
 from dash import Dash
 from dash_data_table import DashDataTable
 
+TITLE = "Simple"
+DESCRIPTION = "The simplest example"
+
 columns = [
     {"name": "Title", "selector": "title", "sortable": True},
     {"name": "Directior", "selector": "director", "sortable": True},
@@ -25,14 +28,23 @@ rows = [
 ]
 
 
+def layout(ctx=None):
+    return DashDataTable(title="Table", columns=columns, data=rows,)
+
+
 app = Dash(
     __name__,
     external_stylesheets=[
-        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css",
+        "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css",
+    ],
+    external_scripts=[
+        "https://code.jquery.com/jquery-3.5.1.slim.min.js",
+        "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js",
     ],
 )
 
-app.layout = DashDataTable(title="Table", columns=columns, data=rows,)
+app.layout = layout()
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server()
+

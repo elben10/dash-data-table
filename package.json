@@ -4,7 +4,7 @@
   "description": "Project Description",
   "main": "build/index.js",
   "scripts": {
-    "start": "webpack-serve --config ./webpack.serve.config.js --open",
+    "start": "npm run build && FLASK_APP=docs.view:server flask run",
     "build:jl": "dash-generate-components ./src/components dash_data_table -p package-info.json --jl-prefix 'ddt' && npm run build:clean-files",
     "build:js": "webpack --mode production",
     "build:py": "dash-generate-components ./src/components dash_data_table -p package-info.json && npm run build:copy-files && npm run build:clean-files && mv dash_data_table/components/_imports_.py dash_data_table/components/__init__.py",
