@@ -5,11 +5,13 @@ from dash_data_table import DashDataTable
 
 TITLE = "Simple"
 DESCRIPTION = "The simplest example"
+WEIGHT = 0
 
 columns = [
-    {"name": "Title", "selector": "title", "sortable": True},
-    {"name": "Directior", "selector": "director", "sortable": True},
-    {"name": "Runtime (m)", "selector": "runtime", "sortable": True, "right": True},
+    {"name": "ID", "selector": "id"},
+    {"name": "Title", "selector": "title"},
+    {"name": "Directior", "selector": "director"},
+    {"name": "Runtime (m)", "selector": "runtime", "right": True},
 ]
 
 rows = [
@@ -30,6 +32,10 @@ rows = [
 
 def layout(ctx=None):
     return DashDataTable(title="Table", columns=columns, data=rows,)
+
+
+def init_callbacks(app):
+    pass
 
 
 app = Dash(
