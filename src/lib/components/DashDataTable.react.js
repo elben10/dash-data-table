@@ -1,60 +1,56 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DataTable from 'react-data-table-component';
-import { props } from 'ramda';
+import Expanded from '../helper-components/Expanded'
 
-const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
-
-export default class DashDataTable extends Component {
-    render() {
-        return <div id={this.props.id} className={this.props.containerClassName} style={this.props.containerStyle}><DataTable
-            title={this.props.title}
-            columns={this.props.columns}
-            data={this.props.data}
-            keyField={this.props.keyField}
-            striped={this.props.striped}
-            highlightOnHover={this.props.highlightOnHover}
-            pointerOnHover={this.props.pointerOnHover}
-            className={this.props.className}
-            style={this.props.style}
-            responsive={this.props.responsive}
-            disabled={this.props.disabled}
-            overflowY={this.props.overflowY}
-            overflowYOffset={this.props.overflowYOffset}
-            dense={this.props.dense}
-            noTableHead={this.props.noTableHead}
-            persistTableHead={this.props.persistTableHead}
-            direction={this.props.direction}
-            selectableRows={this.props.selectableRows}
-            selectableRowsVisibleOnly={this.props.selectableRowsVisibleOnly}
-            selectableRowsHighlight={this.props.selectableRowsHighlight}
-            selectableRowsNoSelectAll={this.props.selectableRowsNoSelectAll}
-            expandableRows={this.props.expandableRows}
-            expandOnRowClicked={this.props.expandOnRowClicked}
-            expandOnRowDoubleClicked={this.props.expandOnRowDoubleClicked}
-            expandableRowsHideExpander={this.props.expandableRowsHideExpander}
-            expandableRowsComponent={<ExpandedComponent />}
-            defaultSortField={this.props.defaultSortField}
-            defaultSortAsc={this.props.defaultSortAsc}
-            sortServer={this.props.sortServer}
-            pagination={this.props.pagination}
-            paginationServer={this.props.paginationServer}
-            paginationDefaultPage={this.props.paginationDefaultPage}
-            paginationPerPage={this.props.paginationPerPage}
-            paginationRowsPerPageOptions={this.props.paginationRowsPerPageOptions}
-            paginationTotalRows={this.props.paginationTotalRows}
-            noHeader={this.props.noHeader}
-            fixedHeader={this.props.fixedHeader}
-            fixedHeaderScrollHeight={this.props.fixedHeaderScrollHeight}
-            onChangePage={currentPage => this.props.setProps({ currentPage })}
-            onChangeRowsPerPage={(currentRowsPerPage, currentPage) => this.props.setProps({ currentRowsPerPage, currentPage })}
-            onRowClicked={(row) => this.props.setProps({ currentClickedRow: row[this.props.keyField || 'id'] })}
-            onRowDoubleClicked={(row) => this.props.setProps({ currentDoubleClickedRow: row[this.props.keyField || 'id'] })}
-            onSelectedRowsChange={(row) => this.props.setProps({ currentSelectedRows: row.selectedRows.map(elem => elem[this.props.keyField || 'id']) })}
-            onSort={(column, sortDirection) => this.props.setProps({ currentSorting: { column, sortDirection } })}
+const DashDataTable = (props) => {
+        return <div id={props.id} className={props.containerClassName} style={props.containerStyle}><DataTable
+            title={props.title}
+            columns={props.columns}
+            data={props.data}
+            keyField={props.keyField}
+            striped={props.striped}
+            highlightOnHover={props.highlightOnHover}
+            pointerOnHover={props.pointerOnHover}
+            className={props.className}
+            style={props.style}
+            responsive={props.responsive}
+            disabled={props.disabled}
+            overflowY={props.overflowY}
+            overflowYOffset={props.overflowYOffset}
+            dense={props.dense}
+            noTableHead={props.noTableHead}
+            persistTableHead={props.persistTableHead}
+            direction={props.direction}
+            selectableRows={props.selectableRows}
+            selectableRowsVisibleOnly={props.selectableRowsVisibleOnly}
+            selectableRowsHighlight={props.selectableRowsHighlight}
+            selectableRowsNoSelectAll={props.selectableRowsNoSelectAll}
+            expandableRows={props.expandableRows}
+            expandOnRowClicked={props.expandOnRowClicked}
+            expandOnRowDoubleClicked={props.expandOnRowDoubleClicked}
+            expandableRowsHideExpander={props.expandableRowsHideExpander}
+            expandableRowsComponent={<Expanded />}
+            defaultSortField={props.defaultSortField}
+            defaultSortAsc={props.defaultSortAsc}
+            sortServer={props.sortServer}
+            pagination={props.pagination}
+            paginationServer={props.paginationServer}
+            paginationDefaultPage={props.paginationDefaultPage}
+            paginationPerPage={props.paginationPerPage}
+            paginationRowsPerPageOptions={props.paginationRowsPerPageOptions}
+            paginationTotalRows={props.paginationTotalRows}
+            noHeader={props.noHeader}
+            fixedHeader={props.fixedHeader}
+            fixedHeaderScrollHeight={props.fixedHeaderScrollHeight}
+            onChangePage={currentPage => props.setProps({ currentPage })}
+            onChangeRowsPerPage={(currentRowsPerPage, currentPage) => props.setProps({ currentRowsPerPage, currentPage })}
+            onRowClicked={(row) => props.setProps({ currentClickedRow: row[props.keyField || 'id'] })}
+            onRowDoubleClicked={(row) => props.setProps({ currentDoubleClickedRow: row[props.keyField || 'id'] })}
+            onSelectedRowsChange={(row) => props.setProps({ currentSelectedRows: row.selectedRows.map(elem => elem[props.keyField || 'id']) })}
+            onSort={(column, sortDirection) => props.setProps({ currentSorting: { column, sortDirection } })}
         /></div>
     }
-}
 
 DashDataTable.defaultProps = {
     pagination: true,
