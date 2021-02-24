@@ -1,17 +1,20 @@
+import json
 import random
 
+import dash_html_components as html
 from dash import Dash
+from dash.dependencies import Input, Output
 from dash_data_table import DashDataTable
 
-TITLE = "Simple"
-DESCRIPTION = "The simplest example"
-WEIGHT = 0
+TITLE = "Sorting"
+DESCRIPTION = "Enable column sorting"
+WEIGHT = 1
 
 columns = [
-    {"name": "ID", "selector": "id"},
-    {"name": "Title", "selector": "title"},
-    {"name": "Directior", "selector": "director"},
-    {"name": "Runtime (m)", "selector": "runtime", "right": True},
+    {"name": "ID", "selector": "id", "sortable": True},
+    {"name": "Title", "selector": "title", "sortable": True},
+    {"name": "Directior", "selector": "director", "sortable": True},
+    {"name": "Runtime (m)", "selector": "runtime", "sortable": True, "right": True},
 ]
 
 rows = [
@@ -31,11 +34,20 @@ rows = [
 
 
 def layout(ctx=None):
-    return DashDataTable(title="Table", columns=columns, data=rows,)
+    return html.Div(
+        [
+            DashDataTable(id="sortingTable", title="Table", columns=columns, data=rows,),
+            html.Div(id="sortingContainer"),
+        ]
+    )
 
 
 def init_callbacks(app):
-    pass
+    @app.callback(Output("sortingContainer", "children"), Input("sortingTable", "currentSorting"))
+    def update_container(sorting):
+        if sorting:
+            return json.dumps(sorting)
+        return "No sorting"
 
 
 app = Dash(
@@ -49,8 +61,9 @@ app = Dash(
     ],
 )
 
-app.layout = layout()
 
 if __name__ == "__main__":
+    app.layout = layout()
+    init_callbacks(app)
     app.run_server()
 

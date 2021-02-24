@@ -1,11 +1,13 @@
 import random
 
+import dash_html_components as html
 from dash import Dash
+from dash.dependencies import Input, Output
 from dash_data_table import DashDataTable
 
-TITLE = "Simple"
-DESCRIPTION = "The simplest example"
-WEIGHT = 0
+TITLE = "Clicklable rows"
+DESCRIPTION = "Shows which row was clicked or double clicked"
+WEIGHT = 2
 
 columns = [
     {"name": "ID", "selector": "id"},
@@ -31,11 +33,36 @@ rows = [
 
 
 def layout(ctx=None):
-    return DashDataTable(title="Table", columns=columns, data=rows,)
+    return html.Div(
+        [
+            DashDataTable(
+                id="clickedRowsTable", title="Table", columns=columns, data=rows,
+            ),
+            html.Div(id="clickedRowsContainer"),
+        ]
+    )
 
 
 def init_callbacks(app):
-    pass
+    @app.callback(
+        Output("clickedRowsContainer", "children"),
+        Input("clickedRowsTable", "currentClickedRow"),
+        Input("clickedRowsTable", "currentDoubleClickedRow"),
+    )
+    def update_container(clicked_row, double_clicked_row):
+        if clicked_row and double_clicked_row:
+            return [
+                html.P(f"The last row that was clicked was id: {clicked_row}"),
+                html.P(
+                    f"The last row that was double clicked was {double_clicked_row}"
+                ),
+            ]
+        elif clicked_row and not double_clicked_row:
+            return [
+                html.P(f"The last row that was clicked was id: {clicked_row}"),
+                html.P("No row has been double clicked yet"),
+            ]
+        return "No row has been clicked or double clicked yet"
 
 
 app = Dash(
@@ -49,8 +76,8 @@ app = Dash(
     ],
 )
 
-app.layout = layout()
-
 if __name__ == "__main__":
+    app.layout = layout()
+    init_callbacks(app)
     app.run_server()
 

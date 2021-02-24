@@ -1,9 +1,11 @@
+from examples.simple import init_callbacks
 import importlib
 import os
 from pathlib import Path
 
 import dash_html_components as html
 
+from docs.app import app
 from docs.components.gallery import gallery
 from docs.components.wrapper import wrapper
 
@@ -28,6 +30,8 @@ def get_basename(path):
 
 EXAMPLE_PATH = Path("examples")
 EXAMPLES = example_lookup(EXAMPLE_PATH)
+for library in EXAMPLES.values():
+    library.init_callbacks(app)
 
 
 def layout(ctx):
@@ -39,8 +43,14 @@ def layout(ctx):
                 html.Div(
                     gallery(
                         [
-                            {"href": href, "title": library.TITLE, "description": library.DESCRIPTION}
-                            for href, library in EXAMPLES.items()
+                            {
+                                "href": href,
+                                "title": library.TITLE,
+                                "description": library.DESCRIPTION,
+                            }
+                            for href, library in sorted(
+                                EXAMPLES.items(), key=lambda elem: elem[1].WEIGHT
+                            )
                         ]
                     ),
                     className="pt-5",
