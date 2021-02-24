@@ -8,8 +8,6 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7, 3.8, 3.9]
-    env:
-      POETRY_VIRTUALENVS_CREATE: false
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
@@ -21,6 +19,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Python Poetry Action
       uses: abatilo/actions-poetry@v2.1.0
+    - name: Configure poetry
+      run: |
+        poetry config virtualenvs.in-project true
+    - name: Set up python cache
+      uses: actions/cache@v2
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
     - name: Install dependencies
       run: |
         poetry install
