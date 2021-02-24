@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import DataTable from 'react-data-table-component';
 import Expanded from '../helper-components/Expanded'
@@ -290,3 +290,5 @@ DashDataTable.propTypes = {
      */
     fixedHeaderScrollHeight: PropTypes.string,
 };
+
+export default DashDataTable;
