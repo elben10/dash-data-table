@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "ramda": "^0.26.1",
-    "react-data-table-component": "^7.0.0-alpha-5",
+    "react-data-table-component": "^7.0.0-alpha-8",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
