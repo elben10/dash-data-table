@@ -26,4 +26,3 @@ _css_dist = []
 for component in components.__all__:
     setattr(locals()[component], "_js_dist", _js_dist)
     setattr(locals()[component], "_css_dist", _css_dist)
-
