@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import DataTable from 'react-data-table-component';
 import Expanded from '../helper-components/Expanded';
 
+const columnTransformer = (columns) => {
+    return columns.map((column) => {
+        return {
+            ...column,
+            selector: (row) => row[column.selector],
+            selectorName: column.selector,
+        };
+    });
+};
+
 const DashDataTable = (props) => {
+    const [columns, setColumns] = useState([]);
+    useEffect(() => {
+        setColumns(columnTransformer(props.columns));
+    }, [props.columns]);
     return (
         <div
             id={props.id}
@@ -12,7 +26,7 @@ const DashDataTable = (props) => {
         >
             <DataTable
                 title={props.title}
-                columns={props.columns}
+                columns={columns}
                 data={props.data}
                 keyField={props.keyField}
                 striped={props.striped}
@@ -73,7 +87,12 @@ const DashDataTable = (props) => {
                     })
                 }
                 onSort={(column, sortDirection) =>
-                    props.setProps({currentSorting: {column, sortDirection}})
+                    props.setProps({
+                        currentSorting: {
+                            column: column.selectorName,
+                            sortDirection,
+                        },
+                    })
                 }
             />
         </div>
