@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import DataTable from 'react-data-table-component';
+import CellRender from '../helper-components/CellRender';
 import Expanded from '../helper-components/Expanded';
 
 const columnTransformer = (columns) => {
     return columns.map((column) => {
-        return {
-            ...column,
-            selector: (row) => row[column.selector],
-            selectorName: column.selector,
-        };
+        const columnCopy = {...column};
+        columnCopy.selector = (row) => row[column.selector];
+        columnCopy.selectorName = column.selector;
+
+        if (column.type) {
+            columnCopy.cell = (row) => <CellRender column={column} row={row} />;
+        }
+
+        return columnCopy;
     });
 };
 
