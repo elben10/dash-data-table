@@ -1,5 +1,5 @@
 {
-  "name": "dash_data_table",
+  "name": "dash-data-table",
   "version": "0.0.2",
   "description": "Project Description",
   "main": "build/index.js",
