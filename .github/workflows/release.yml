@@ -27,7 +27,9 @@ jobs:
         poetry install
         npm install
     - name: Build a binary wheel and a source tarball
-      run: poetry build
+      run: |
+        npm build
+        poetry build
     - name: Publish distribution 📦 to Test PyPI
       run: poetry publish --repository testpypi --username __token__ --password ${{ secrets.PYPI_API_TEST_TOKEN }}
     - name: Publish distribution 📦 to PyPI

@@ -4,7 +4,7 @@ import sys
 from dash_data_table import components
 from dash_data_table.components import *
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 _current_path = os.path.dirname(os.path.abspath(__file__))
 METADATA_PATH = os.path.join(_current_path, "components", "metadata.json")
 
