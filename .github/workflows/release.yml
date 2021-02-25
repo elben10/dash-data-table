@@ -21,6 +21,7 @@ jobs:
     - name: Configure poetry
       run: |
         poetry config virtualenvs.create false
+        poetry config repositories.testpypi https://test.pypi.org/legacy/
     - name: Install dependencies
       run: |
         poetry install
@@ -28,7 +29,7 @@ jobs:
     - name: Build a binary wheel and a source tarball
       run: poetry build
     - name: Publish distribution 📦 to Test PyPI
-      run: poetry publish --repository https://test.pypi.org/legacy/ --username __token__ --password ${{ secrets.PYPI_API_TEST_TOKEN }}
+      run: poetry publish --repository testpypi --username __token__ --password ${{ secrets.PYPI_API_TEST_TOKEN }}
     - name: Publish distribution 📦 to PyPI
       run: poetry publish --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
     - run: npm publish
