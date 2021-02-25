@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dash_data_table"
-version = "0.0.3"
+version = "0.0.4"
 description = ""
 authors = ["Jakob Jul Elben <elbenjakobjul@gmail.com>"]
 include = ["README.md", "package.json", "dash_data_table/components/*"]
